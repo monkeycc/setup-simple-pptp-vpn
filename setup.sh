@@ -89,15 +89,16 @@ LEN=$(echo ${#PASS})
 
 if [ -z "$PASS" ] || [ $LEN -lt 8 ] || [ -z "$NAME"]
 then
-   P1=`cat /dev/urandom | tr -cd abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789 | head -c 3`
-   P2=`cat /dev/urandom | tr -cd abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789 | head -c 3`
-   P3=`cat /dev/urandom | tr -cd abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789 | head -c 3`
-   PASS="$P1-$P2-$P3"
+   P1=`cat /dev/urandom | tr -cd abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789 | head -c 5`
+   P2=`cat /dev/urandom | tr -cd abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789 | head -c 6`
+   P3=`cat /dev/urandom | tr -cd abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789 | head -c 7`
+   P4=`cat /dev/urandom | tr -cd abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789 | head -c 8`
+   PASS="$P1-$P2-$P3-$P4"
 fi
 
 if [ -z "$NAME" ]
 then
-   NAME="vpn"
+   NAME="monkeycc"
 fi
 
 cat >/etc/ppp/chap-secrets <<END
@@ -120,6 +121,7 @@ require-mschap-v2
 require-mppe-128
 ms-dns 8.8.8.8
 ms-dns 8.8.4.4
+ms-dns 114.114.114.114
 proxyarp
 lock
 nobsdcomp 
